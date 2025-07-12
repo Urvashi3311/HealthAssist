@@ -1,0 +1,166 @@
+
+  /* Medical Theme Colors */
+  :root {
+    --primary: #2c7da0;
+    --primary-light: #a9d6e5;
+    --primary-dark: #014f86;
+    --accent: #54c2cc;
+    --neutral: #f8f9fa;
+    --text-dark: #2b2d42;
+    --text-light: #ffffff;
+    --error: #d62828;
+    --success: #57a773;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* body {
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    background-color: #f0f7fa;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+   */
+  .login-container {
+    padding: 30px;
+    padding-top: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: white; */
+    /* border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow); */
+  }
+  .login-div{
+    
+    padding: 30px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .login-form h2 {
+    color: var(--primary-dark);
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .logo {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo img {
+    height: 60px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .form-group label {
+    font-size: 14px;
+    color: var(--text-dark);
+    font-weight: 500;
+  }
+  
+  .form-group input {
+    padding: 12px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  
+  .form-group input:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(84, 194, 204, 0.2);
+  }
+  
+  .login-button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+  }
+  
+  .login-button:hover {
+    background-color: var(--primary-dark);
+  }
+  
+  .login-button:disabled {
+    background-color: #b3c1c8;
+    cursor: not-allowed;
+  }
+  
+  .error-message {
+    color: var(--error);
+    background-color: rgba(214, 40, 40, 0.1);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .signup-link {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-dark);
+    margin-top: 20px;
+  }
+  
+  .signup-link a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .signup-link a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Medical theme decorative elements */
+  .medical-icon {
+    position: absolute;
+    opacity: 0.05;
+    z-index: -1;
+  }
+  
+  .medical-icon.heart {
+    top: 20%;
+    left: 5%;
+    font-size: 80px;
+  }
+  
+  .medical-icon.pulse {
+    bottom: 10%;
+    right: 5%;
+    font-size: 100px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 480px) {
+    .login-container {
+      padding: 20px;
+      max-width: 90%;
+    }
+  }
