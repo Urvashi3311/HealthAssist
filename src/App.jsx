@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import ChatBox from './components/ChatBox';
 import MessageInput from './components/MessageInput';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import './styles.css';
 import EmergencyMap from './components/EmergencyMap';
+import VoiceAssistant from './components/VoiceAssistant';
+import MapNavigation from './components/MapNavigation';
 
 import {
   checkAuth,
@@ -19,8 +20,6 @@ import {
 import './styles.css';
 
 // DASHBOARD COMPONENT
-import { useNavigate } from 'react-router-dom';
-
 function Dashboard() {
   const [activeSessionId, setActiveSessionId] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -96,8 +95,23 @@ function Dashboard() {
     }
   };
 
-  const handleMessagesUpdated = (updatedMessages) => {
-    setMessages(updatedMessages);
+  const handleVoiceInput = (transcript) => {
+    // Auto-send voice input as a message
+    if (transcript.trim() && !loading) {
+      handleSendMessage(transcript.trim());
+    }
+  };
+
+  const handlePlayResponse = (speakFunction) => {
+    // Find the last bot message and read it aloud
+    const lastBotMessage = [...messages].reverse().find(msg => msg.sender === 'bot');
+    if (lastBotMessage && speakFunction) {
+      speakFunction(lastBotMessage.content);
+    }
+  };
+
+  const handleNavigateToMap = () => {
+    navigate('/emergency-map');
   };
 
   const handleLogout = async () => {
@@ -112,7 +126,11 @@ function Dashboard() {
 
   return (
     <div className="app">
-      <Sidebar onSelectSession={(sessionId) => setActiveSessionId(sessionId)} activeSessionId={activeSessionId} />
+      <Sidebar 
+        onSelectSession={(sessionId) => setActiveSessionId(sessionId)} 
+        activeSessionId={activeSessionId}
+        onNavigateToMap={handleNavigateToMap}
+      />
       <div className="main-content">
         <Header onLogout={handleLogout} />
         <div className="chat-container">
@@ -120,11 +138,20 @@ function Dashboard() {
           <ChatBox
             messages={messages}
             sessionId={activeSessionId}
-            onMessagesUpdated={handleMessagesUpdated}
+            onMessagesUpdated={setMessages}
           />
-          <MessageInput onSendMessage={handleSendMessage} disabled={loading || !activeSessionId} />
+          <MessageInput 
+            onSendMessage={handleSendMessage} 
+            disabled={loading || !activeSessionId} 
+          />
         </div>
       </div>
+      
+      {/* Add Voice Assistant Component */}
+      <VoiceAssistant 
+        onTranscript={handleVoiceInput}
+        onPlayResponse={handlePlayResponse}
+      />
     </div>
   );
 }
@@ -161,10 +188,20 @@ function AppRouter() {
       <Route path="/login" element={authenticated ? <Navigate to="/dashboard" /> : <Login setAuthenticated={setAuthenticated} />} />
       <Route path="/signup" element={authenticated ? <Navigate to="/dashboard" /> : <Signup setAuthenticated={setAuthenticated} />} />
       <Route path="/dashboard" element={authenticated ? <Dashboard /> : <Navigate to="/login" />} />
+      <Route path="/emergency-map" element={authenticated ? <EmergencyMapWrapper /> : <Navigate to="/login" />} />
       <Route path="/" element={<Navigate to={authenticated ? "/dashboard" : "/login"} />} />
       <Route path="*" element={<Navigate to={authenticated ? "/dashboard" : "/login"} />} />
-      <Route path="/emergency-map" element={<EmergencyMap />} /> {/* This is crucial */}
     </Routes>
+  );
+}
+
+// Emergency Map Wrapper with Navigation
+function EmergencyMapWrapper() {
+  return (
+    <div style={{ height: '100vh', width: '100%', position: 'relative' }}>
+      <MapNavigation />
+      <EmergencyMap />
+    </div>
   );
 }
 

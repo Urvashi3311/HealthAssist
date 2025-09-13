@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { fetchSessions, createSession, deleteSession } from '../services/api';
 
 const Sidebar = ({ onSelectSession, activeSessionId }) => {
-  const [sessions, setSessions] = useState([]); // Stores fetched chat sessions
+  const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Load sessions when component mounts
   useEffect(() => {
     loadSessions();
   }, []);
 
-  // Fetches sessions from the backend
   const loadSessions = async () => {
     setLoading(true);
     try {
@@ -23,7 +21,6 @@ const Sidebar = ({ onSelectSession, activeSessionId }) => {
     }
   };
 
-  // Creates a new chat session
   const handleCreateSession = async () => {
     setLoading(true);
     try {
@@ -39,18 +36,15 @@ const Sidebar = ({ onSelectSession, activeSessionId }) => {
     }
   };
 
-  // Deletes a chat session
   const handleDeleteSession = async (sessionId, e) => {
-    e.stopPropagation(); // Prevent triggering the session selection
+    e.stopPropagation();
     if (window.confirm('Are you sure you want to delete this chat session?')) {
       try {
         const result = await deleteSession(sessionId);
         if (!result.error) {
-          // Remove the deleted session from the list
           const updatedSessions = sessions.filter(session => session.session_id !== sessionId);
           setSessions(updatedSessions);
-          
-          // If the deleted session was active, clear the active session
+
           if (activeSessionId === sessionId) {
             onSelectSession(null);
           }
@@ -61,7 +55,6 @@ const Sidebar = ({ onSelectSession, activeSessionId }) => {
     }
   };
 
-  // Format the session date for display
   const formatDate = (dateString) => {
     if (!dateString) return '';
     const date = new Date(dateString);
@@ -85,6 +78,7 @@ const Sidebar = ({ onSelectSession, activeSessionId }) => {
           {loading ? 'Creating...' : 'New Chat'}
         </button>
       </div>
+
       <div className="sessions-scroll">
         {loading && sessions.length === 0 ? (
           <div className="loading-sessions">Loading chats...</div>
