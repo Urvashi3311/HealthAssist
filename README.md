@@ -2,7 +2,7 @@
 
 **HealthAssist** is a smart AI-powered healthcare assistant that helps users with both **home remedies** and **emergency medical support** — all through a simple chatbot interface. Users can describe symptoms like **cough, fever, or headache**, and the chatbot suggests safe, natural remedies using common ingredients like honey, ginger, or lemon.
 
-The app also includes an **emergency button** with a dropdown for common emergencies (e.g. heart attack, injury). When triggered, it shows **real-time nearby hospitals** using **OpenStreetMap API**, including **distance and estimated travel time** from the user’s location.
+The app also includes an **emergency button** with a dropdown for common emergencies (e.g., heart attack, injury). When triggered, it shows **real-time nearby hospitals** using **OpenStreetMap API**, including **distance and estimated travel time** from the user’s location.
 
 HealthAssist supports **user authentication**, **session history**, and full **CRUD operations** — so users can view, reuse, or delete past conversations. The app uses **GROQ API**, **LangChain**, and a custom **proxy server (Node.js)** for smooth backend communication. Built with **React**, **Flask**, and **MongoDB**, HealthAssist brings together AI, maps, and user-friendly healthcare tools in one integrated platform.
 
@@ -39,9 +39,7 @@ HealthAssist supports **user authentication**, **session history**, and full **C
 
 | AI Chat | Emergency Response | Get Direction |
 |--------|--------------------|---------------|
-| ![Chat](images/healthassist.png) | ![Response](images/emergencyresponse.png) | ![Get Direction](images/image.png) |
-
-
+| ![Chat](images/healthassist.png) | ![Response](images/emergencyresponse.png) | ![Get Direction](images/get-direction.png) |
 
 ---
 
@@ -72,8 +70,8 @@ HealthAssist supports **user authentication**, **session history**, and full **C
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/healthassist.git
-cd healthassist
+git clone https://github.com/your-username/HealthAssist.git
+cd HealthAssist
 
 # 2. Set environment variables
 # Create a .env file and include:
@@ -95,4 +93,3 @@ node index.js
 cd client
 npm install
 npm start
-
