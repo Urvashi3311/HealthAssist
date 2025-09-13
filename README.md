@@ -39,7 +39,7 @@ HealthAssist supports **user authentication**, **session history**, and full **C
 
 | AI Chat | Emergency Response | Get Direction |
 |--------|--------------------|---------------|
-| ![Chat](images/healthassist.png) | ![Response](images/emergencyresponse.png) | ![Get Direction](images/getdirection.png) |
+| ![Chat](images/healthassist.png) | ![Response](images/emergencyresponse.png) | ![Get Direction](images/image.png) |
 
 
 
